@@ -10,5 +10,5 @@ class Person {
 
 		void insert();
 		void show();
-		bool findByDni(std::string dni);
+		bool compareByUniqueData(std::string dni);
 };

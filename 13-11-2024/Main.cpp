@@ -3,27 +3,29 @@
 #include "Menu.cpp"
 #include "Storage.cpp"
 #include "Person.cpp"
+#include "Animal.cpp"
 
 int main() {
 	Menu menu;
-	Storage<Person> storage;
+	Storage<Person> storagePerson;
+	Storage<Animal> storageAnimal;
 
-	std::string dniTemp;
+	std::string classUniqueData;
 	bool moveElement;
 
-	while(menu.optionSelected != 4) {
+	while(menu.optionSelected != 7) {
 		menu.showMenu();
 
 		switch(menu.optionSelected) {
 			case 1:
-				storage.array[storage.elementNumber].insert();
-				storage.elementNumber++;
+				storagePerson.array[storagePerson.elementNumber].insert();
+				storagePerson.elementNumber++;
 
 				break;
 
 			case 2:
-				for(int unsigned i = 0; i < storage.elementNumber; i++) {
-					storage.array[i].show();
+				for(int unsigned i = 0; i < storagePerson.elementNumber; i++) {
+					storagePerson.array[i].show();
 				}
 
 				break;
@@ -31,30 +33,69 @@ int main() {
 			case 3:
 				moveElement = false;
 
-				std::cout << "Ingrese DNI de la persona que desea eliminar: ";
-				getline(std::cin, dniTemp);
+				std::cout << "Ingrese identificador del registro que desea eliminar: ";
+				getline(std::cin, classUniqueData);
 
-				for(int unsigned i = 0; i < storage.elementNumber; i++) {
-					if(!moveElement && storage.array[i].findByDni(dniTemp)) {
+				for(int unsigned i = 0; i < storagePerson.elementNumber; i++) {
+					if(!moveElement && storagePerson.array[i].compareByUniqueData(classUniqueData)) {
 						moveElement = true;
 					}
 
-					if(moveElement && i < (sizeof(storage.array)/sizeof(storage.array[0]) - 1)) {
-						storage.array[i] = storage.array[i + 1];
+					if(moveElement && i < (sizeof(storagePerson.array)/sizeof(storagePerson.array[0]) - 1)) {
+						storagePerson.array[i] = storagePerson.array[i + 1];
 					}
 				}
 
 				if(moveElement) {
-					storage.elementNumber--;
+					storagePerson.elementNumber--;
 				} else {
 					std::cout << std::endl;
-					std::cout << "El DNI ingresado, no existe.";
+					std::cout << "El identificador ingresado no existe.";
+					std::cout << std::endl;
+				}
+
+				break;
+			
+			case 4:
+				storageAnimal.array[storageAnimal.elementNumber].insert();
+				storageAnimal.elementNumber++;
+
+				break;
+
+			case 5:
+				for(int unsigned i = 0; i < storageAnimal.elementNumber; i++) {
+					storageAnimal.array[i].show();
+				}
+
+				break;
+
+			case 6:
+				moveElement = false;
+
+				std::cout << "Ingrese identificador del registro que desea eliminar: ";
+				getline(std::cin, classUniqueData);
+
+				for(int unsigned i = 0; i < storageAnimal.elementNumber; i++) {
+					if(!moveElement && storageAnimal.array[i].compareByUniqueData(classUniqueData)) {
+						moveElement = true;
+					}
+
+					if(moveElement && i < (sizeof(storageAnimal.array)/sizeof(storageAnimal.array[0]) - 1)) {
+						storageAnimal.array[i] = storageAnimal.array[i + 1];
+					}
+				}
+
+				if(moveElement) {
+					storageAnimal.elementNumber--;
+				} else {
+					std::cout << std::endl;
+					std::cout << "El identificador ingresado no existe.";
 					std::cout << std::endl;
 				}
 
 				break;
 
-			case 4:
+			case 7:
 				std::cout << "Gracias!!! Hasta pronto." << std::endl;
 
 				break;

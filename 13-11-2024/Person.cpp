@@ -22,7 +22,7 @@ void Person::show() {
 	std::cout << "Apellido\t: " << this->surName << std::endl;
 }
 
-bool Person::findByDni(std::string dni) {
+bool Person::compareByUniqueData(std::string dni) {
 	return this->dni == dni;
 }
 
